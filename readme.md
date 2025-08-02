@@ -70,9 +70,10 @@ CREATE TABLE facturas (
     FOREIGN KEY (pago_id) REFERENCES pagos(id)
 );
 
+```
 ### 2. Procedimiento almacenado
 
-
+```sql
 CREATE PROCEDURE sp_realizar_pago
     @cliente_id INT,
     @metodo_pago_id INT,
@@ -83,10 +84,13 @@ AS
 BEGIN
     INSERT INTO pagos (cliente_id, metodo_pago_id, monto, fecha_pago, estatus)
     VALUES (@cliente_id, @metodo_pago_id, @monto, @fecha_pago, @estatus);
-END
+END;
+
+```
 
 ### 3. Función
 
+```sql
 CREATE FUNCTION fn_historial_pagos (@cliente_id INT)
 RETURNS TABLE
 AS
@@ -107,8 +111,10 @@ RETURN
     WHERE p.cliente_id = @cliente_id
 );
 
-### 4. Trigger
+```
 
+### 4. Trigger
+```sql
 CREATE TRIGGER trg_generar_factura
 ON pagos
 AFTER INSERT
